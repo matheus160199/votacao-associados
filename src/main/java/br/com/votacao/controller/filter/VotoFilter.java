@@ -1,7 +1,7 @@
 package br.com.votacao.controller.filter;
 
-import br.com.votacao.repository.PautaRepository;
 import br.com.votacao.repository.VotoRepository;
+import br.com.votacao.repository.service.PautaRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -14,10 +14,10 @@ public class VotoFilter {
     private VotoRepository repository;
 
     @Autowired
-    private PautaRepository pautaRepository;
+    private PautaRepositoryService pautaRepository;
 
     public void validaNovoVoto(final String pautaId, final String associadoId){
-        if (!pautaRepository.findById(pautaId).get().isSessaoDisponivel())
+        if (!pautaRepository.buscaPorId(pautaId).isSessaoDisponivel())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sessão de votação para esta pauta não está disponivel!");
         if (repository.findByAssociadoAndPauta(associadoId, pautaId).isPresent())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Associado já votou nessa pauta!");
