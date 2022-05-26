@@ -5,10 +5,9 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-
 import br.com.votacao.entity.Pauta;
 import br.com.votacao.entity.Voto;
 import br.com.votacao.repository.service.PautaRepositoryService;
@@ -19,6 +18,9 @@ public class PautaUseCaseImpl implements PautaUseCase {
 
     @Autowired
     private PautaRepositoryService repository;
+
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
     @Override
     public Pauta nova(String nome) {
@@ -50,7 +52,7 @@ public class PautaUseCaseImpl implements PautaUseCase {
             public void run() {
                 pauta.finalizaSessao();
                 repository.salva(pauta);
-                String a = pauta.getResultado().toString();
+                kafkaTemplate.send("resultado-pautas-topic", pauta);
             }
         };
     }
