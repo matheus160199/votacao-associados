@@ -22,6 +22,11 @@ Serviço de votação em pautas para associados.
 ```
 mvn jmeter:jmeter
 ```
+**OU**
+```
+ mvn clean install
+ ```
+
 ###### Subir o container docker com o banco de dados, kafka e zookeeper:
 ```
 docker compose up -d
