@@ -18,15 +18,6 @@ Serviço de votação em pautas para associados.
 
 ## Instruções para teste
 
-###### Teste de performance (opcional):
-```
-mvn jmeter:jmeter
-```
-**OU**
-```
- mvn clean install
- ```
-
 ###### Subir o container docker com o banco de dados, kafka e zookeeper:
 ```
 docker compose up -d
@@ -36,6 +27,16 @@ docker compose up -d
 VotacaoApplication.java
 ```
 #### A aplicação rodará na porta localhost:8080
+
+###### Teste de performance (opcional):
+```
+mvn jmeter:jmeter
+```
+**OU**
+```
+ mvn clean install
+ ```
+
 #### Endpoints:
 
 ###### Collection do Postman:
