@@ -28,7 +28,7 @@ VotacaoApplication.java
 ```
 #### A aplicação rodará na porta localhost:8080
 
-###### Teste de performance (opcional):
+###### Teste de performance (após subir o container):
 ```
 mvn jmeter:jmeter
 ```
